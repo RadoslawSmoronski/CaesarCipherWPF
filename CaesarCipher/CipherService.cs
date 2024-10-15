@@ -82,6 +82,41 @@ namespace CaesarCipher
             return sb.ToString();
         }
 
+        public string ConvertFromCipherToText(string text)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (char c in text)
+            {
+                char key = char.ToUpper(c);
+                if (AlphabetForward.ContainsKey(key))
+                {
+                    int num = AlphabetForward[char.ToUpper(c)] - MoveAmount;
+
+                    if ((num) < 0)
+                    {
+                        num += AlphabetForward.Count;
+                    }
+
+                    char newKey = AlphabetBackward[num];
+
+                    if (char.IsUpper(c))
+                    {
+                        sb.Append(newKey);
+                    }
+                    else
+                    {
+                        sb.Append(char.ToLower(newKey));
+                    }
+                }
+                else
+                {
+                    sb.Append(c);
+                }
+            }
+
+            return sb.ToString();
+        }
 
     }
 }

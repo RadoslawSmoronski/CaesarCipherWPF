@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CaesarCipherWPF
 {
@@ -17,6 +18,9 @@ namespace CaesarCipherWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool isTextChangeing = false;
+        bool isLastChangesTextIsText = true;
+
         private readonly ICipherService _cipherService;
         public MainWindow(ICipherService cipherService)
         {
@@ -32,8 +36,20 @@ namespace CaesarCipherWPF
             _cipherService.IncreaseMoveAmount();
             MoveAmount.Text = _cipherService.MoveAmount.ToString();
 
-            var text = TextTextBox.Text;
-            CipherTextBox.Text = _cipherService.ConvertFromTextToCipher(text);
+            if(isLastChangesTextIsText)
+            {
+                var text = TextTextBox.Text;
+                isTextChangeing = true;
+                CipherTextBox.Text = _cipherService.ConvertFromTextToCipher(text);
+                isTextChangeing = false;
+            }
+            else
+            {
+                var text = CipherTextBox.Text;
+                isTextChangeing = true;
+                TextTextBox.Text = _cipherService.ConvertFromCipherToText(text);
+                isTextChangeing = false;
+            }
         }
 
         private void DecreaseButtonClick(object sender, RoutedEventArgs e)
@@ -41,18 +57,44 @@ namespace CaesarCipherWPF
             _cipherService.DecreaseMoveAmount();
             MoveAmount.Text = _cipherService.MoveAmount.ToString();
 
-            var text = TextTextBox.Text;
-            CipherTextBox.Text = _cipherService.ConvertFromTextToCipher(text);
+            if (isLastChangesTextIsText)
+            {
+                isTextChangeing = true;
+                var text = TextTextBox.Text;
+                CipherTextBox.Text = _cipherService.ConvertFromTextToCipher(text);
+                isTextChangeing = false;
+            }
+            else
+            {
+                isTextChangeing = true;
+                var text = CipherTextBox.Text;
+                TextTextBox.Text = _cipherService.ConvertFromCipherToText(text);
+                isTextChangeing = false;
+            }
         }
 
-        private void TextTextChanged(object sender, RoutedEventArgs e)
+        private void TextTextChanged(object sender, TextChangedEventArgs e)
         {
+            if (sender != TextTextBox || isTextChangeing == true) return;
+
             var text = TextTextBox.Text;
+
+            isTextChangeing = true;
             CipherTextBox.Text = _cipherService.ConvertFromTextToCipher(text);
+            isTextChangeing = false;
+            isLastChangesTextIsText = true;
         }
 
-        private void CipherTextChanged(object sender, RoutedEventArgs e)
+        private void CipherTextChanged(object sender, TextChangedEventArgs e)
         {
+            if (sender != CipherTextBox || isTextChangeing == true) return;
+
+            var text = CipherTextBox.Text;
+
+            isTextChangeing = true;
+            TextTextBox.Text = _cipherService.ConvertFromCipherToText(text);
+            isTextChangeing = false;
+            isLastChangesTextIsText = false;
         }
     }
 }
