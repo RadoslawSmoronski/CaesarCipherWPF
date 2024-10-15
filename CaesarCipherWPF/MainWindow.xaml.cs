@@ -26,5 +26,17 @@ namespace CaesarCipherWPF
 
             InitializeComponent();
         }
+
+        private void IncreaseButtonClick(object sender, RoutedEventArgs e)
+        {
+            _cipherService.IncreaseMoveAmount();
+            MoveAmount.Text = _cipherService.MoveAmount.ToString();
+        }
+
+        private void DecreaseButtonClick(object sender, RoutedEventArgs e)
+        {
+            _cipherService.DecreaseMoveAmount();
+            MoveAmount.Text = _cipherService.MoveAmount.ToString();
+        }
     }
 }

@@ -16,12 +16,12 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Text="Caesar Cipher Converter" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,42"/>
-        <TextBlock Grid.Row="0" FontSize="15" HorizontalAlignment="Center" Margin="0,40,0,13">
+        <TextBlock x:Name="MoveTextBlock" Grid.Row="0" FontSize="15" HorizontalAlignment="Center" Margin="0,40,0,13">
             <Run Text="Przesunięcie o "/>
-            <Run Text="{Binding MoveAmount}"/>
+            <Run x:Name="MoveAmount"  Text="{Binding MoveAmount}"/>
         </TextBlock>
-        <Button Content="Zmniejsz" FontSize="10" Margin="234,38,438,13" />
-        <Button Content="Powiększ" FontSize="10" Margin="438,39,234,12" />
+        <Button Content="Zmniejsz" FontSize="10" Margin="234,38,438,13" Click="DecreaseButtonClick" />
+        <Button Content="Powiększ" FontSize="10" Margin="438,39,234,12" Click="IncreaseButtonClick"/>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
