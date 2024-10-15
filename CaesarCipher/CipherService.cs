@@ -20,7 +20,7 @@ namespace CaesarCipher
 {
                 'A', 'Ą', 'B', 'C', 'Ć', 'D', 'E', 'Ę', 'F', 'G',
                 'H', 'I', 'J', 'K', 'L', 'Ł', 'M', 'N', 'Ń', 'O',
-                'Ó', 'P', 'R', 'S', 'Ś', 'T', 'U', 'Ú', 'W', 'Y',
+                'Ó', 'P', 'R', 'S', 'Ś', 'T', 'U', 'W', 'Y',
                 'Z', 'Ż', 'Ź'
 };
             for (int i = 0; i < alphabet.Length; i++)
@@ -32,7 +32,7 @@ namespace CaesarCipher
 
         public void IncreaseMoveAmount()
         {
-            if (MoveAmount < AlphabetForward.Count)
+            if(MoveAmount < (AlphabetForward.Count-1))
             {
                 MoveAmount++;
             }
@@ -52,9 +52,31 @@ namespace CaesarCipher
 
             foreach (char c in text)
             {
-                int num = AlphabetForward[char.ToUpper(c)];
+                char key = char.ToUpper(c);
+                if (AlphabetForward.ContainsKey(key))
+                {
+                    int num = AlphabetForward[char.ToUpper(c)] + MoveAmount;
 
-                sb.Append(AlphabetBackward[num + MoveAmount]);
+                    if((num) >= AlphabetForward.Count)
+                    {
+                        num -= AlphabetForward.Count;
+                    }
+
+                    char newKey = AlphabetBackward[num];
+
+                    if (char.IsUpper(c))
+                    {
+                        sb.Append(newKey);
+                    }
+                    else
+                    {
+                        sb.Append(char.ToLower(newKey));
+                    }
+                }
+                else
+                {
+                    sb.Append(c);
+                }
             }
 
             return sb.ToString();

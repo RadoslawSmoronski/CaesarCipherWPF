@@ -31,12 +31,28 @@ namespace CaesarCipherWPF
         {
             _cipherService.IncreaseMoveAmount();
             MoveAmount.Text = _cipherService.MoveAmount.ToString();
+
+            var text = TextTextBox.Text;
+            CipherTextBox.Text = _cipherService.ConvertFromTextToCipher(text);
         }
 
         private void DecreaseButtonClick(object sender, RoutedEventArgs e)
         {
             _cipherService.DecreaseMoveAmount();
             MoveAmount.Text = _cipherService.MoveAmount.ToString();
+
+            var text = TextTextBox.Text;
+            CipherTextBox.Text = _cipherService.ConvertFromTextToCipher(text);
+        }
+
+        private void TextTextChanged(object sender, RoutedEventArgs e)
+        {
+            var text = TextTextBox.Text;
+            CipherTextBox.Text = _cipherService.ConvertFromTextToCipher(text);
+        }
+
+        private void CipherTextChanged(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

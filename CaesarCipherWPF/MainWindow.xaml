@@ -33,14 +33,14 @@
             <Grid Grid.Column="0" Margin="10">
                 <StackPanel>
                     <TextBlock Text="Treść" Margin="0,0,0,5"/>
-                    <TextBox Width="Auto" Height="200" Text="" />
+                    <TextBox x:Name="TextTextBox" Width="Auto" Height="200" Text="" TextChanged="TextTextChanged"/>
                 </StackPanel>
             </Grid>
 
             <Grid Grid.Column="2" Margin="10">
                 <StackPanel>
                     <TextBlock Text="Inna Treść" Margin="0,0,0,5"/>
-                    <TextBox Width="Auto" Height="200" Text="" />
+                    <TextBox x:Name="CipherTextBox" Width="Auto" Height="200" Text="" TextChanged="CipherTextChanged"/>
                 </StackPanel>
             </Grid>
         </Grid>
