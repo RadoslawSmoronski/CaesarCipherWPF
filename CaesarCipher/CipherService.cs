@@ -17,12 +17,14 @@ namespace CaesarCipher
             MoveAmount = 2;
 
             char[] alphabet = new char[]
-{
+            {
                 'A', 'Ą', 'B', 'C', 'Ć', 'D', 'E', 'Ę', 'F', 'G',
                 'H', 'I', 'J', 'K', 'L', 'Ł', 'M', 'N', 'Ń', 'O',
-                'Ó', 'P', 'R', 'S', 'Ś', 'T', 'U', 'W', 'Y',
-                'Z', 'Ż', 'Ź'
-};
+                'Ó', 'P', 'Q', 'R', 'S', 'Ś', 'T', 'U', 'V', 'W',
+                'X', 'Y', 'Z', 'Ź', 'Ż'
+            };
+
+
             for (int i = 0; i < alphabet.Length; i++)
             {
                 AlphabetForward[alphabet[i]] = i;

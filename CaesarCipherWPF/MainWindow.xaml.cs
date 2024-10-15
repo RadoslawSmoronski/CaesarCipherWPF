@@ -31,9 +31,14 @@ namespace CaesarCipherWPF
             InitializeComponent();
         }
 
-        private void IncreaseButtonClick(object sender, RoutedEventArgs e)
+        private void IncreaseDecreaseButtonClick(object sender, RoutedEventArgs e)
         {
-            _cipherService.IncreaseMoveAmount();
+            if(sender == IncreaseButton)
+                _cipherService.IncreaseMoveAmount();
+            else
+                _cipherService.DecreaseMoveAmount();
+
+
             MoveAmount.Text = _cipherService.MoveAmount.ToString();
 
             if(isLastChangesTextIsText)
@@ -47,27 +52,6 @@ namespace CaesarCipherWPF
             {
                 var text = CipherTextBox.Text;
                 isTextChangeing = true;
-                TextTextBox.Text = _cipherService.ConvertFromCipherToText(text);
-                isTextChangeing = false;
-            }
-        }
-
-        private void DecreaseButtonClick(object sender, RoutedEventArgs e)
-        {
-            _cipherService.DecreaseMoveAmount();
-            MoveAmount.Text = _cipherService.MoveAmount.ToString();
-
-            if (isLastChangesTextIsText)
-            {
-                isTextChangeing = true;
-                var text = TextTextBox.Text;
-                CipherTextBox.Text = _cipherService.ConvertFromTextToCipher(text);
-                isTextChangeing = false;
-            }
-            else
-            {
-                isTextChangeing = true;
-                var text = CipherTextBox.Text;
                 TextTextBox.Text = _cipherService.ConvertFromCipherToText(text);
                 isTextChangeing = false;
             }
