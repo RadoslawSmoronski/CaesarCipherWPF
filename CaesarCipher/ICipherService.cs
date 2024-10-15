@@ -8,6 +8,9 @@ namespace CaesarCipher
 {
     public interface ICipherService
     {
+        public Dictionary<char, int> AlphabetForward { get; }
+        public Dictionary<int, char> AlphabetBackward { get; }
         public int MoveAmount { get; set; }
+        public string ConvertFromTextToCipher(string text);
     }
 }
