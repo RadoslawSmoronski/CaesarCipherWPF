@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using CaesarCipher;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,8 +17,13 @@ namespace CaesarCipherWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly ICipherService _cipherService;
+        public MainWindow(ICipherService cipherService)
         {
+            _cipherService = cipherService;
+
+            DataContext = _cipherService;
+
             InitializeComponent();
         }
     }
