@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CaesarCipher
 {
@@ -52,38 +53,15 @@ namespace CaesarCipher
 
         public string ConvertFromTextToCipher(string text)
         {
-            StringBuilder sb = new StringBuilder();
-
-            foreach(char c in text)
-            {
-                int cNum = GetCharNumberFromChar(c);
-
-                if (cNum != -1)
-                {
-                    int num = cNum + MoveAmount;
-
-                    if ((num) >= Alphabet.Length)
-                    {
-                        num -= Alphabet.Length;
-                    }
-
-                    char newCharacter = Alphabet[num];
-
-                    if(char.IsLower(c))
-                        newCharacter = char.ToLower(newCharacter);
-
-                    sb.Append(newCharacter);
-                }
-                else
-                {
-                    sb.Append(c);
-                }
-            }
-
-            return sb.ToString();
+            return ConvertCaesarCipher(text, cNum => (cNum + MoveAmount) % Alphabet.Length);
         }
 
         public string ConvertFromCipherToText(string text)
+        {
+            return ConvertCaesarCipher(text, cNum => (cNum - MoveAmount + Alphabet.Length) % Alphabet.Length);
+        }
+
+        public string ConvertCaesarCipher(string text, Func<int, int> func)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -93,11 +71,11 @@ namespace CaesarCipher
 
                 if (cNum != -1)
                 {
-                    int num = cNum - MoveAmount;
+                    int num = func(cNum);
 
-                    if ((num) < 0)
+                    if (num < 0 || num >= Alphabet.Length)
                     {
-                        num += Alphabet.Length;
+                        continue;
                     }
 
                     char newCharacter = Alphabet[num];
@@ -115,6 +93,7 @@ namespace CaesarCipher
 
             return sb.ToString();
         }
+
 
     }
 }

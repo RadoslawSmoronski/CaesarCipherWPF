@@ -23,8 +23,8 @@ namespace CaesarCipherWPF
             {
                 'A', 'Ą', 'B', 'C', 'Ć', 'D', 'E', 'Ę', 'F', 'G',
                 'H', 'I', 'J', 'K', 'L', 'Ł', 'M', 'N', 'Ń', 'O',
-                'Ó', 'P', 'Q', 'R', 'S', 'Ś', 'T', 'U', 'V', 'W',
-                'X', 'Y', 'Z', 'Ź', 'Ż'
+                'Ó', 'P', 'R', 'S', 'Ś', 'T', 'U', 'W', 'Y', 'Z',
+                'Ź', 'Ż'
             };
 
             services.AddSingleton<ICipherService>(provider => new CipherService(alphabet));
