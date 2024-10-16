@@ -22,7 +22,7 @@
         </ComboBox>
 
         <TextBlock x:Name="AlphabetTextBlock" Grid.Row="0" Text="Alphabet" FontSize="15" HorizontalAlignment="Left" Margin="1,41,0,10" Width="78"/>
-        <ComboBox x:Name="AlphabetLanguageComboBox" Margin="84,41,554,10" SelectedIndex="0">
+        <ComboBox x:Name="AlphabetComboBox" Margin="84,41,554,10" SelectedIndex="0" SelectionChanged="AlphabetComboBoxSelectionChanged">
             <ComboBoxItem Content="English" />
             <ComboBoxItem Content="Polski" />
         </ComboBox>

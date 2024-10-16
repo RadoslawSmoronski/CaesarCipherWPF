@@ -116,5 +116,39 @@ namespace CaesarCipherWPF
 
             UpdateUiLanguage();
         }
+
+        bool isInitialAlphabetComboBox = false;
+        private void AlphabetComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender != AlphabetComboBox) return;
+
+            if (isInitialAlphabetComboBox == false)
+            {
+                isInitialAlphabetComboBox = true;
+                return;
+            }
+
+            if (AlphabetComboBox.SelectedIndex == 0)
+                _cipherService.ChangeAlphabet(AlphabetTypeEnum.English);
+            else
+                _cipherService.ChangeAlphabet(AlphabetTypeEnum.Polish);
+
+            MoveAmount.Text = _cipherService.MoveAmount.ToString();
+
+            if (isLastChangesTextIsText)
+            {
+                var text = TextTextBox.Text;
+                isTextChangeing = true;
+                CipherTextBox.Text = _cipherService.ConvertFromTextToCipher(text);
+                isTextChangeing = false;
+            }
+            else
+            {
+                var text = CipherTextBox.Text;
+                isTextChangeing = true;
+                TextTextBox.Text = _cipherService.ConvertFromCipherToText(text);
+                isTextChangeing = false;
+            }
+        }
     }
 }

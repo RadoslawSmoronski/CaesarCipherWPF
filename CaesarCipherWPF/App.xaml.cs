@@ -22,15 +22,7 @@ namespace CaesarCipherWPF
         {
             var services = new ServiceCollection();
 
-            var alphabet = new char[]
-            {
-                'A', 'Ą', 'B', 'C', 'Ć', 'D', 'E', 'Ę', 'F', 'G',
-                'H', 'I', 'J', 'K', 'L', 'Ł', 'M', 'N', 'Ń', 'O',
-                'Ó', 'P', 'R', 'S', 'Ś', 'T', 'U', 'W', 'Y', 'Z',
-                'Ź', 'Ż'
-            };
-
-            services.AddSingleton<ICipherService>(provider => new CipherService(alphabet));
+            services.AddSingleton<ICipherService>(provider => new CipherService(AlphabetTypeEnum.English));
             services.AddScoped<ILanguageService, LanguageService>();
             services.AddSingleton<MainWindow>();
 
