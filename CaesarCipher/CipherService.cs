@@ -8,33 +8,35 @@ namespace CaesarCipher
 {
     public class CipherService : ICipherService
     {
-        public Dictionary<char, int> AlphabetForward { get; } = new Dictionary<char, int>();
-        public Dictionary<int, char> AlphabetBackward { get; } = new Dictionary<int, char>();
+        public char[] Alphabet { get; }
+
         public int MoveAmount { get; set; }
 
-        public CipherService()
+        public CipherService(char[] alphabet)
         {
             MoveAmount = 2;
 
-            char[] alphabet = new char[]
-            {
-                'A', 'Ą', 'B', 'C', 'Ć', 'D', 'E', 'Ę', 'F', 'G',
-                'H', 'I', 'J', 'K', 'L', 'Ł', 'M', 'N', 'Ń', 'O',
-                'Ó', 'P', 'Q', 'R', 'S', 'Ś', 'T', 'U', 'V', 'W',
-                'X', 'Y', 'Z', 'Ź', 'Ż'
-            };
-
-
-            for (int i = 0; i < alphabet.Length; i++)
-            {
-                AlphabetForward[alphabet[i]] = i;
-                AlphabetBackward[i] = alphabet[i];
-            }
+            Alphabet = alphabet;
         }
+
+        private int GetCharNumberFromChar(char character)
+        {
+          
+            for(int i=0; i < Alphabet.Length; i++)
+            {
+                if (Alphabet[i] == char.ToUpper(character))
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
 
         public void IncreaseMoveAmount()
         {
-            if(MoveAmount < (AlphabetForward.Count-1))
+            if(MoveAmount < (Alphabet.Length-1))
             {
                 MoveAmount++;
             }
@@ -52,28 +54,25 @@ namespace CaesarCipher
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (char c in text)
+            foreach(char c in text)
             {
-                char key = char.ToUpper(c);
-                if (AlphabetForward.ContainsKey(key))
+                int cNum = GetCharNumberFromChar(c);
+
+                if (cNum != -1)
                 {
-                    int num = AlphabetForward[char.ToUpper(c)] + MoveAmount;
+                    int num = cNum + MoveAmount;
 
-                    if((num) >= AlphabetForward.Count)
+                    if ((num) >= Alphabet.Length)
                     {
-                        num -= AlphabetForward.Count;
+                        num -= Alphabet.Length;
                     }
 
-                    char newKey = AlphabetBackward[num];
+                    char newCharacter = Alphabet[num];
 
-                    if (char.IsUpper(c))
-                    {
-                        sb.Append(newKey);
-                    }
-                    else
-                    {
-                        sb.Append(char.ToLower(newKey));
-                    }
+                    if(char.IsLower(c))
+                        newCharacter = char.ToLower(newCharacter);
+
+                    sb.Append(newCharacter);
                 }
                 else
                 {
@@ -90,26 +89,23 @@ namespace CaesarCipher
 
             foreach (char c in text)
             {
-                char key = char.ToUpper(c);
-                if (AlphabetForward.ContainsKey(key))
+                int cNum = GetCharNumberFromChar(c);
+
+                if (cNum != -1)
                 {
-                    int num = AlphabetForward[char.ToUpper(c)] - MoveAmount;
+                    int num = cNum - MoveAmount;
 
                     if ((num) < 0)
                     {
-                        num += AlphabetForward.Count;
+                        num += Alphabet.Length;
                     }
 
-                    char newKey = AlphabetBackward[num];
+                    char newCharacter = Alphabet[num];
 
-                    if (char.IsUpper(c))
-                    {
-                        sb.Append(newKey);
-                    }
-                    else
-                    {
-                        sb.Append(char.ToLower(newKey));
-                    }
+                    if (char.IsLower(c))
+                        newCharacter = char.ToLower(newCharacter);
+
+                    sb.Append(newCharacter);
                 }
                 else
                 {

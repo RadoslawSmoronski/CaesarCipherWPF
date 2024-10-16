@@ -18,7 +18,16 @@ namespace CaesarCipherWPF
         public App()
         {
             var services = new ServiceCollection();
-            services.AddSingleton<ICipherService, CipherService>();
+
+            var alphabet = new char[]
+            {
+                'A', 'Ą', 'B', 'C', 'Ć', 'D', 'E', 'Ę', 'F', 'G',
+                'H', 'I', 'J', 'K', 'L', 'Ł', 'M', 'N', 'Ń', 'O',
+                'Ó', 'P', 'Q', 'R', 'S', 'Ś', 'T', 'U', 'V', 'W',
+                'X', 'Y', 'Z', 'Ź', 'Ż'
+            };
+
+            services.AddSingleton<ICipherService>(provider => new CipherService(alphabet));
             services.AddSingleton<MainWindow>();
 
             _serviceProvider = services.BuildServiceProvider();
