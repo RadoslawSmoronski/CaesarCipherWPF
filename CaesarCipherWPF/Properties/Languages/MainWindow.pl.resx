@@ -118,24 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AlphabetTextBlock" xml:space="preserve">
-    <value>Alphabet</value>
+    <value>Alfabet</value>
   </data>
   <data name="CipherTextBlock" xml:space="preserve">
-    <value>Caesar cipher</value>
+    <value>Szyfr Cezara</value>
   </data>
   <data name="DecreaseButton" xml:space="preserve">
-    <value>Decrease</value>
+    <value>Zmniejsz</value>
   </data>
   <data name="IncreaseButton" xml:space="preserve">
-    <value>Increase</value>
+    <value>Powiększ</value>
   </data>
   <data name="LanguageTextBlock" xml:space="preserve">
-    <value>Language</value>
+    <value>Język</value>
   </data>
   <data name="TextTextBlock" xml:space="preserve">
-    <value>Text</value>
+    <value>Treść</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Konwerter Szyfru Cezara</value>
   </data>
   <data name="TitleTextBlock" xml:space="preserve">
-    <value>Caesar Cipher Converter</value>
+    <value>Konwerter Szyfru Cezara</value>
   </data>
 </root>

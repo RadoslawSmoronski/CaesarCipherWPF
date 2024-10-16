@@ -1,4 +1,5 @@
 ﻿using CaesarCipher;
+using CaesarCipherWPF.Service;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,13 +23,29 @@ namespace CaesarCipherWPF
         bool isLastChangesTextIsText = true;
 
         private readonly ICipherService _cipherService;
-        public MainWindow(ICipherService cipherService)
+        private readonly ILanguageService _languageService;
+
+        public MainWindow(ICipherService cipherService, ILanguageService languageService)
         {
             _cipherService = cipherService;
+            _languageService = languageService;
 
             DataContext = _cipherService;
 
             InitializeComponent();
+            UpdateUiLanguage();
+        }
+
+        private void UpdateUiLanguage()
+        {
+            AlphabetTextBlock.Text = _languageService.GetText("AlphabetTextBlock");
+            CipherTextBlock.Text = _languageService.GetText("CipherTextBlock");
+            DecreaseButton.Content = _languageService.GetText("DecreaseButton");
+            IncreaseButton.Content = _languageService.GetText("IncreaseButton");
+            LanguageTextBlock.Text = _languageService.GetText("LanguageTextBlock");
+            TextTextBlock.Text = _languageService.GetText("TextTextBlock");
+            Title = _languageService.GetText("Title");
+            TitleTextBlock.Text = _languageService.GetText("TitleTextBlock");
         }
 
         private void IncreaseDecreaseButtonClick(object sender, RoutedEventArgs e)
@@ -79,6 +96,25 @@ namespace CaesarCipherWPF
             TextTextBox.Text = _cipherService.ConvertFromCipherToText(text);
             isTextChangeing = false;
             isLastChangesTextIsText = false;
+        }
+
+        bool isInitialLoadLanguageComboBox = false;
+        private void LanguageComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender != LanguageComboBox) return;
+
+            if (isInitialLoadLanguageComboBox == false)
+            {
+                isInitialLoadLanguageComboBox = true;
+                return;
+            }
+
+            if (LanguageComboBox.SelectedIndex == 0)
+                _languageService.ChangeLanguage(LanguagesTypeEnum.English);
+            else
+                _languageService.ChangeLanguage(LanguagesTypeEnum.Polish);
+
+            UpdateUiLanguage();
         }
     }
 }

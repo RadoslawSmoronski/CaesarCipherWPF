@@ -1,8 +1,11 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using System.Configuration;
 using System.Data;
+using System.Resources;
 using System.Windows;
 using CaesarCipher;
+using CaesarCipherWPF.Service;
 using Microsoft.Extensions.DependencyInjection;
 
 
@@ -28,6 +31,7 @@ namespace CaesarCipherWPF
             };
 
             services.AddSingleton<ICipherService>(provider => new CipherService(alphabet));
+            services.AddScoped<ILanguageService, LanguageService>();
             services.AddSingleton<MainWindow>();
 
             _serviceProvider = services.BuildServiceProvider();
