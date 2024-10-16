@@ -61,7 +61,7 @@ namespace CaesarCipher
             return ConvertCaesarCipher(text, cNum => (cNum - MoveAmount + Alphabet.Length) % Alphabet.Length);
         }
 
-        public string ConvertCaesarCipher(string text, Func<int, int> func)
+        private string ConvertCaesarCipher(string text, Func<int, int> func)
         {
             StringBuilder sb = new StringBuilder();
 
