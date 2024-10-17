@@ -132,6 +132,9 @@
   <data name="LanguageTextBlock" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="MoveTextBlock" xml:space="preserve">
+    <value>Shift by</value>
+  </data>
   <data name="TextTextBlock" xml:space="preserve">
     <value>Text</value>
   </data>

@@ -46,6 +46,7 @@ namespace CaesarCipherWPF
             TextTextBlock.Text = _languageService.GetText("TextTextBlock");
             Title = _languageService.GetText("Title");
             TitleTextBlock.Text = _languageService.GetText("TitleTextBlock");
+            MoveTextBlock.Text = _languageService.GetText("MoveTextBlock");
         }
 
         private void IncreaseDecreaseButtonClick(object sender, RoutedEventArgs e)
@@ -56,7 +57,7 @@ namespace CaesarCipherWPF
                 _cipherService.DecreaseMoveAmount();
 
 
-            MoveAmount.Text = _cipherService.MoveAmount.ToString();
+            MoveAmountTextBlock.Text = _cipherService.MoveAmount.ToString();
 
             if(isLastChangesTextIsText)
             {
@@ -129,11 +130,11 @@ namespace CaesarCipherWPF
             }
 
             if (AlphabetComboBox.SelectedIndex == 0)
-                _cipherService.ChangeAlphabet(AlphabetTypeEnum.English);
+                _cipherService.ChangeAlphabet(AlphabetTypeEnum.Latin);
             else
                 _cipherService.ChangeAlphabet(AlphabetTypeEnum.Polish);
 
-            MoveAmount.Text = _cipherService.MoveAmount.ToString();
+            MoveAmountTextBlock.Text = _cipherService.MoveAmount.ToString();
 
             if (isLastChangesTextIsText)
             {

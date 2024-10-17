@@ -63,14 +63,14 @@ namespace CaesarCipher.Properties {
         /// <summary>
         ///   Looks up a localized string similar to ABCDEFGHIJKLMNOPQRSTUVWXYZ.
         /// </summary>
-        internal static string English {
+        internal static string Latin {
             get {
-                return ResourceManager.GetString("English", resourceCulture);
+                return ResourceManager.GetString("Latin", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AĄBCĆDEĘFGHIJKLŁMNŃOÓPRŚTUWYZŹŻ.
+        ///   Looks up a localized string similar to AĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUWYZŹŻ.
         /// </summary>
         internal static string Polish {
             get {

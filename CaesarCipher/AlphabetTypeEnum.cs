@@ -8,7 +8,7 @@ namespace CaesarCipherWPF.Service
 {
     public enum AlphabetTypeEnum
     {
-        English,
+        Latin,
         Polish
     }
 }

@@ -34,8 +34,8 @@ namespace CaesarCipher
         {
             switch (type)
             {
-                case AlphabetTypeEnum.English:
-                    AlphabetType = "English";
+                case AlphabetTypeEnum.Latin:
+                    AlphabetType = "Latin";
                     break;
 
                 case AlphabetTypeEnum.Polish:

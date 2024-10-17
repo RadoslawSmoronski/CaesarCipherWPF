@@ -22,7 +22,7 @@ namespace CaesarCipherWPF
         {
             var services = new ServiceCollection();
 
-            services.AddSingleton<ICipherService>(provider => new CipherService(AlphabetTypeEnum.English));
+            services.AddSingleton<ICipherService>(provider => new CipherService(AlphabetTypeEnum.Latin));
             services.AddScoped<ILanguageService, LanguageService>();
             services.AddSingleton<MainWindow>();
 
