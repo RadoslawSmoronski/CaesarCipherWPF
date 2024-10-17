@@ -7,34 +7,107 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Height="400" Width="780"
-        ResizeMode="NoResize"
-        Title="Caesar Cipher Converter">
-    <Grid Margin="20">
+        WindowStyle="None"
+        Background="#2d2d2d"
+        Title="Caesar Cipher Converter"
+        MouseLeftButtonDown="WindowMouseLeftButtonDown">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <Style x:Key="TitleBarButtonStyle"
+               TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="bdr_main"
+                                BorderThickness="1"
+                                BorderBrush="Transparent"
+                                Background="Transparent">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"
+                                                  ContentSource="Content" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter TargetName="bdr_main"
+                                        Property="Background"
+                                        Value="#474747"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed"
+                                     Value="True">
+                                <Setter TargetName="bdr_main"
+                                        Property="Background"
+                                        Value="#373737"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="LanguageTextBlock" Grid.Row="0" Text="LanguageTextBlock" FontSize="15" HorizontalAlignment="Left" Margin="1,15,0,61" Width="78"/>
-        <ComboBox x:Name="LanguageComboBox" Margin="80,14,558,60" SelectedIndex="0" SelectionChanged="LanguageComboBoxSelectionChanged">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="minimazeButton"
+                    Width="30"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Style="{StaticResource TitleBarButtonStyle}"
+                    Click="minimazeButtonClick">
+                <Image Source="/Resources/Images/minimize.png"
+                       Height="20"
+                       Width="20"/>
+            </Button>
+            <Button x:Name="maximizeButton"
+                    Width="30"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Style="{StaticResource TitleBarButtonStyle}"
+                    Click="maximizeButtonClick">
+                <Image x:Name="maximizeButtonImage" Source="/Resources/Images/maximize.png"
+                       Height="20"
+                       Width="20"/>
+            </Button>
+            <Button x:Name="closeButton"
+                    Width="30"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Style="{StaticResource TitleBarButtonStyle}"
+                    Click="closeButtonClick"
+                    Margin="0,0,5,0">
+                <Image Source="/Resources/Images/close.png"
+                       Height="20"
+                       Width="20"/>
+            </Button>
+        </StackPanel>
+
+        <TextBlock x:Name="LanguageTextBlock" Grid.Row="1" Text="LanguageTextBlock" FontSize="15" HorizontalAlignment="Left" Margin="1,15,0,61" Width="78"/>
+        <ComboBox x:Name="LanguageComboBox" Grid.Row="1" Margin="80,14,558,60" SelectedIndex="0" SelectionChanged="LanguageComboBoxSelectionChanged">
             <ComboBoxItem Content="English" />
             <ComboBoxItem Content="Polski" />
         </ComboBox>
 
-        <TextBlock x:Name="AlphabetTextBlock" Grid.Row="0" Text="AlphabetTextBloc" FontSize="15" HorizontalAlignment="Left" Margin="1,61,0,14" Width="78"/>
-        <ComboBox x:Name="AlphabetComboBox" Margin="80,60,558,14" SelectedIndex="0" SelectionChanged="AlphabetComboBoxSelectionChanged">
+        <TextBlock x:Name="AlphabetTextBlock" Grid.Row="1" Text="AlphabetTextBloc" FontSize="15" HorizontalAlignment="Left" Margin="1,61,0,14" Width="78"/>
+        <ComboBox x:Name="AlphabetComboBox" Grid.Row="1" Margin="80,60,558,14" SelectedIndex="0" SelectionChanged="AlphabetComboBoxSelectionChanged">
             <ComboBoxItem Content="Latin" />
             <ComboBoxItem Content="Polski" />
         </ComboBox>
 
-        <TextBlock x:Name="TitleTextBlock" Grid.Row="0" Text="TitleTextBlock" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,61"/>
-        <Button x:Name="DecreaseButton" Content="DecreaseButton" FontSize="10" Margin="234,38,438,13" Click="IncreaseDecreaseButtonClick" />
-        <Button x:Name="IncreaseButton" Content="IncreaseButton" FontSize="10" Margin="438,39,234,12" Click="IncreaseDecreaseButtonClick"/>
+        <TextBlock x:Name="TitleTextBlock" Grid.Row="1" Text="TitleTextBlock" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,61"/>
+        <Button x:Name="DecreaseButton" Grid.Row="1" Content="DecreaseButton" FontSize="10" Margin="234,38,438,13" Click="IncreaseDecreaseButtonClick" />
+        <Button x:Name="IncreaseButton" Grid.Row="1" Content="IncreaseButton" FontSize="10" Margin="438,39,234,12" Click="IncreaseDecreaseButtonClick"/>
 
-        <TextBlock x:Name="MoveAmountTextBlock" Grid.Row="0" Text="2" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,41,0,20"/>
-        <TextBlock x:Name="MoveTextBlock" Grid.Row="0" Text="MoveTextBlock" FontSize="10" HorizontalAlignment="Center" Margin="0,72,0,13" RenderTransformOrigin="0.534,-0.575"/>
+        <TextBlock x:Name="MoveAmountTextBlock" Grid.Row="1" Text="2" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,41,0,20"/>
+        <TextBlock x:Name="MoveTextBlock" Grid.Row="1" Text="MoveTextBlock" FontSize="10" HorizontalAlignment="Center" Margin="0,72,0,13" RenderTransformOrigin="0.534,-0.575"/>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="10" />

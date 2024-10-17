@@ -151,5 +151,34 @@ namespace CaesarCipherWPF
                 isTextChangeing = false;
             }
         }
+
+        private void minimazeButtonClick(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void maximizeButtonClick(object sender, RoutedEventArgs e)
+        {
+            if(WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+                maximizeButtonImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/maximize.png"));
+            }
+            else
+            {
+                WindowState = WindowState.Maximized;
+                maximizeButtonImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/restore.png"));
+            }
+        }
+
+        private void closeButtonClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void WindowMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }
